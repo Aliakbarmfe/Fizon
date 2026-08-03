@@ -127,21 +127,26 @@
       animation: fadeIn 1.2s ease-in-out;
     }
 
+    /* خط زیر عنوان‌ها (زیر کشیده شده) */
+    .feature-header-wrapper {
+      display: inline-block;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.75);
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+      padding-bottom: 4px;
+      margin-bottom: 10px;
+    }
+
     .feature-header {
       font-size: 1rem;
       font-weight: bold;
       color: #ffffff;
-      display: inline-block;
-      text-decoration: line-through;
-      text-decoration-color: rgba(255, 255, 255, 0.6);
-      margin-bottom: 6px;
     }
 
     .feature-icon {
       color: #ffd700;
       margin-left: 8px;
       font-size: 1.1rem;
-      text-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
+      text-shadow: 0 0 6px rgba(255, 215, 0, 0.6);
     }
 
     .feature-body {
@@ -151,42 +156,60 @@
       padding-right: 5px;
     }
 
-    /* بخش ارتباط با ما */
-    .info-section {
-      margin-top: 35px;
+    /* کادر مدرن و مرتب اطلاعات تماس */
+    .contact-card {
+      background: rgba(18, 18, 18, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      margin-top: 30px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
     }
 
-    .info-row {
+    .contact-item {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-      font-size: 0.9rem;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
     }
 
-    .info-label {
+    .contact-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .contact-label {
+      font-size: 0.88rem;
       color: #ffffff;
       font-weight: 500;
+      text-align: right;
     }
 
-    .phone-val {
-      color: #fff8dc;
-      font-weight: bold;
-      letter-spacing: 1px;
-      text-shadow: 0 0 5px rgba(255, 248, 220, 0.4);
-    }
-
-    .social-val {
-      color: #e0e0e0;
-      font-weight: bold;
+    .contact-val-left {
+      font-size: 0.95rem;
+      text-align: left;
       direction: ltr;
+      font-weight: bold;
     }
 
-    .info-center-text {
+    .phone-style {
+      color: #fff8dc;
+      text-shadow: 0 0 6px rgba(255, 248, 220, 0.5);
+    }
+
+    .social-style {
+      color: #dcdcdc;
+    }
+
+    .contact-badge {
       text-align: center;
-      font-size: 0.85rem;
-      color: #bbbbbb;
-      margin: 15px 0;
+      background: rgba(138, 43, 226, 0.2);
+      border: 1px solid rgba(138, 43, 226, 0.4);
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      color: #e0e0e0;
+      margin: 16px 0;
     }
 
     /* دکمه شناور چت */
@@ -231,7 +254,7 @@
       transform: scale(0.92);
     }
 
-    /* مدال‌ها و پاپ‌آپ‌ها (با انیمیشن فِید) */
+    /* مدال‌ها و پاپ‌آپ‌ها */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -427,7 +450,6 @@
       border-radius: 0 0 24px 24px;
     }
 
-    /* انیمیشن‌های فید عمومی */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
@@ -467,7 +489,7 @@
     </div>
 
     <div class="feature-item">
-      <div>
+      <div class="feature-header-wrapper">
         <i class="fa-solid fa-gift feature-icon"></i>
         <span class="feature-header">مشاوره اختصاصی و رایگان:</span>
       </div>
@@ -475,7 +497,7 @@
     </div>
 
     <div class="feature-item">
-      <div>
+      <div class="feature-header-wrapper">
         <i class="fa-solid fa-bolt feature-icon"></i>
         <span class="feature-header">تحویل سریع:</span>
       </div>
@@ -483,7 +505,7 @@
     </div>
 
     <div class="feature-item">
-      <div>
+      <div class="feature-header-wrapper">
         <i class="fa-solid fa-gem feature-icon"></i>
         <span class="feature-header">ارزش‌افزوده و سرمایه‌گذاری به‌صرفه:</span>
       </div>
@@ -491,7 +513,7 @@
     </div>
 
     <div class="feature-item">
-      <div>
+      <div class="feature-header-wrapper">
         <i class="fa-solid fa-heart feature-icon"></i>
         <span class="feature-header">طراحی خلاقانه و کاربرپسند:</span>
       </div>
@@ -500,23 +522,25 @@
 
     <div class="glowing-line" style="margin-top: 35px;"></div>
 
-    <!-- بخش اطلاعات ارتباطی -->
-    <div class="info-section">
-      <div class="info-row">
-        <span class="info-label">شماره تلفن مجموعه فیزون:</span>
-        <span class="phone-val">09382061251</span>
+    <!-- کارت اطلاعات تماس تراز شده و شیک -->
+    <div class="contact-card">
+      <div class="contact-item">
+        <div class="contact-label">شماره تلفن مجموعه فیزون:</div>
+        <div class="contact-val-left phone-style">09382061251</div>
       </div>
 
-      <div class="info-center-text">پاسخگویی تنها از طریق واتساپ و روبیکا</div>
-
-      <div class="info-row">
-        <span class="info-label">آیدی روبیکا:</span>
-        <span class="social-val">@Fizon_Support</span>
+      <div class="contact-badge">
+        پاسخگویی تنها از طریق واتساپ و روبیکا
       </div>
 
-      <div class="info-row">
-        <span class="info-label">کانال روبیکا جهت دریافت اخبار و اطلاعات:</span>
-        <span class="social-val">@Fizon_site</span>
+      <div class="contact-item">
+        <div class="contact-label">آیدی پشتیبانی روبیکا:</div>
+        <div class="contact-val-left social-style">@Fizon_Support</div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-label">کانال روبیکا جهت دریافت اخبار و اطلاعات:</div>
+        <div class="contact-val-left social-style">@Fizon_site</div>
       </div>
     </div>
   </div>
@@ -526,7 +550,7 @@
     پشتیبانی آنلاین
   </div>
 
-  <!-- پاپ آپ تشخیص سیستم دسکتاپ -->
+  <!-- پاپ آپ دسکتاپ -->
   <div class="modal-overlay" id="desktopModal">
     <div class="modal-card">
       <h3 style="margin-bottom: 12px; font-size: 1.1rem; color: #ffffff;">اعلان سیستم</h3>
@@ -546,7 +570,6 @@
       </div>
       
       <div class="chat-body" id="chatBody">
-        <!-- پیام خوش‌آمدگویی پیش‌فرض -->
         <div class="chat-bubble-wrapper ai">
           <div class="avatar ai-avatar">fizon</div>
           <div class="chat-bubble">
@@ -570,7 +593,7 @@
   </div>
 
   <script>
-    // ۱. بررسی دستگاه و نمایش پاپ‌آپ دسکتاپ
+    // ۱. بررسی دستگاه غیرموبایل
     window.addEventListener('DOMContentLoaded', () => {
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
       if (!isMobile) {
@@ -595,7 +618,7 @@
       chatModal.classList.remove('active');
     });
 
-    // ۳. مدیریت مکالمه و ارتباط با Backend Vercel
+    // ۳. مدیریت مکالمه و ارتباط با API
     const chatBody = document.getElementById('chatBody');
     const chatInput = document.getElementById('chatInput');
     const sendBtn = document.getElementById('sendBtn');
@@ -609,14 +632,11 @@
       const text = chatInput.value.trim();
       if (!text) return;
 
-      // اضافه کردن پیام کاربر به صفحه
       appendMessage('user', text);
       chatInput.value = '';
 
-      // فعال‌سازی تایمر ۱۲ ثانیه‌ای مانع اسپم
       startCooldownTimer(12);
 
-      // نمایش وضعیت در حال تایپ
       typingIndicator.style.display = 'block';
       chatBody.scrollTop = chatBody.scrollHeight;
 
@@ -632,11 +652,9 @@
         const data = await response.json();
         const replyText = data.reply || "در حال حاضر خطایی رخ داده است.";
 
-        // ذخیره تاریخچه
         chatHistory.push({ role: 'user', content: text });
         chatHistory.push({ role: 'assistant', content: replyText });
 
-        // تضمین حداقل ۵ ثانیه تأخیر برای حس واقعی بودن
         const elapsedTime = Date.now() - startTime;
         const remainingDelay = Math.max(0, 5000 - elapsedTime);
 
@@ -698,4 +716,5 @@
     });
   </script>
 </body>
-</html>
+        </html>
+  
