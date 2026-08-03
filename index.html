@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fizon | فیزون</title>
+  <!-- فونت وزیرمتن و آیکون‌های FontAwesome -->
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Vazirmatn', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* هاله بنفش و آبی در پس‌زمینه */
+    .bg-gradient {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 100vw;
+      height: 70vh;
+      background: radial-gradient(circle at bottom right, rgba(138, 43, 226, 0.35), rgba(30, 144, 255, 0.15) 50%, transparent 80%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 25px 20px 100px 20px;
+    }
+
+    /* خط نورانی بالای صفحه */
+    .glowing-line {
+      width: 100%;
+      height: 2px;
+      background: #ffffff;
+      box-shadow: 0 0 12px #ffffff, 0 0 20px #8a2be2;
+      margin-bottom: 20px;
+      border-radius: 2px;
+    }
+
+    /* متن‌های نئونی */
+    .neon-text {
+      color: #00f3ff;
+      text-shadow: 0 0 8px rgba(0, 243, 255, 0.8), 0 0 15px rgba(0, 243, 255, 0.5);
+    }
+
+    .header-title {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .header-subtitle {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #e0e0e0;
+      margin-bottom: 30px;
+    }
+
+    /* کادر نئونی اصلی */
+    .main-card {
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2), inset 0 0 15px rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 20px;
+      background: rgba(10, 10, 10, 0.65);
+      backdrop-filter: blur(10px);
+      line-height: 1.8;
+      font-size: 0.92rem;
+      text-align: justify;
+      margin-bottom: 35px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .main-card p {
+      margin-bottom: 12px;
+    }
+
+    .main-card p:last-child {
+      margin-bottom: 0;
+      font-weight: bold;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    /* بخش چرا فیزون */
+    .section-title {
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .section-desc {
+      text-align: center;
+      font-size: 0.88rem;
+      color: #cccccc;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .feature-item {
+      text-align: right;
+      margin-bottom: 25px;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    .feature-header {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #ffffff;
+      display: inline-block;
+      text-decoration: line-through;
+      text-decoration-color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 6px;
+    }
+
+    .feature-icon {
+      color: #ffd700;
+      margin-left: 8px;
+      font-size: 1.1rem;
+      text-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
+    }
+
+    .feature-body {
+      font-size: 0.88rem;
+      color: #d1d1d1;
+      line-height: 1.7;
+      padding-right: 5px;
+    }
+
+    /* بخش ارتباط با ما */
+    .info-section {
+      margin-top: 35px;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      font-size: 0.9rem;
+    }
+
+    .info-label {
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    .phone-val {
+      color: #fff8dc;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-shadow: 0 0 5px rgba(255, 248, 220, 0.4);
+    }
+
+    .social-val {
+      color: #e0e0e0;
+      font-weight: bold;
+      direction: ltr;
+    }
+
+    .info-center-text {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #bbbbbb;
+      margin: 15px 0;
+    }
+
+    /* دکمه شناور چت */
+    .chat-float-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 125px;
+      height: 48px;
+      background: linear-gradient(135deg, #2e8b57, #8a2be2);
+      border-radius: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.82rem;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+      cursor: pointer;
+      z-index: 99;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.15s ease, opacity 0.3s ease;
+    }
+
+    /* دکمه‌های شیشه‌ای نیم‌دایره */
+    .glass-btn {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 25px;
+      color: #ffffff;
+      padding: 10px 24px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      cursor: pointer;
+      outline: none;
+      transition: transform 0.12s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .glass-btn:active, .chat-float-btn:active {
+      transform: scale(0.92);
+    }
+
+    /* مدال‌ها و پاپ‌آپ‌ها (با انیمیشن فِید) */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      background: rgba(20, 20, 20, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 25px;
+      width: 88%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      transform: scale(0.95);
+      transition: transform 0.35s ease;
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: scale(1);
+    }
+
+    /* پاپ‌آپ چت بزرگ */
+    .chat-modal-card {
+      background: #181818;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      width: 92%;
+      max-width: 440px;
+      height: 82vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.9);
+    }
+
+    .chat-header {
+      background: #222222;
+      padding: 16px;
+      text-align: center;
+      font-size: 0.95rem;
+      font-weight: bold;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+    }
+
+    .chat-close-btn {
+      position: absolute;
+      left: 15px;
+      top: 14px;
+      color: #aaaaaa;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .chat-body {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .chat-bubble-wrapper {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeIn 0.3s forwards ease-in-out;
+    }
+
+    .chat-bubble-wrapper.ai {
+      flex-direction: row;
+    }
+
+    .chat-bubble-wrapper.user {
+      flex-direction: row-reverse;
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #333333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: bold;
+      border: 1px solid rgba(255,255,255,0.2);
+      flex-shrink: 0;
+    }
+
+    .avatar.ai-avatar {
+      background: linear-gradient(135deg, #8a2be2, #00f3ff);
+      color: #ffffff;
+    }
+
+    .avatar.user-avatar {
+      background: #444444;
+      color: #ffffff;
+    }
+
+    .chat-bubble {
+      max-width: 75%;
+      padding: 10px 14px;
+      border-radius: 16px;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    .chat-bubble-wrapper.ai .chat-bubble {
+      background: #2a2a2a;
+      color: #ffffff;
+      border-bottom-right-radius: 4px;
+    }
+
+    .chat-bubble-wrapper.user .chat-bubble {
+      background: #8a2be2;
+      color: #ffffff;
+      border-bottom-left-radius: 4px;
+    }
+
+    .typing-indicator {
+      font-size: 0.75rem;
+      color: #00f3ff;
+      margin-right: 40px;
+      display: none;
+      animation: pulse 1.2s infinite;
+    }
+
+    .chat-footer {
+      padding: 12px;
+      background: #222222;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+    }
+
+    .chat-input-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .chat-input {
+      flex: 1;
+      background: #121212;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 10px 15px;
+      color: white;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .chat-input:disabled {
+      opacity: 0.5;
+    }
+
+    .send-btn {
+      padding: 8px 16px;
+    }
+
+    .timer-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(34, 34, 34, 0.95);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: #ffd700;
+      border-radius: 0 0 24px 24px;
+    }
+
+    /* انیمیشن‌های فید عمومی */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-gradient"></div>
+
+  <div class="container">
+    <div class="glowing-line"></div>
+
+    <div class="header-title neon-text">Fizon | فیزون</div>
+    <div class="header-subtitle">با فیزون ایده هات مرز هارو رد میکنند</div>
+
+    <!-- کادر اصلی توضیحات -->
+    <div class="main-card">
+      <p>
+        در دنیای امروز، وب‌سایت شما فقط یک صفحه اینترنتی نیست؛ بلکه ویترین اصلی، اعتبار و موتور فروش برند شماست. ما در <span class="neon-text">fizon</span> با <span class="neon-text">خلاقیت</span> در طراحی، <span class="neon-text">دقت</span> در جزئیات و <span class="neon-text">سرعت</span> بالای اجرا، فضایی می‌سازیم که مخاطب شما در همان نگاه اول، تفاوت و کیفیت کارتان را احساس کند.
+      </p>
+      <p>
+        ما ایده‌های شما را به وب‌سایت‌هایی مدرن، کاربرپسند و امن تبدیل می‌کنیم تا مسیر رشد کسب‌وکارتان هموارتر شود.
+      </p>
+      <p>پرواز برند شما از اینجا شروع می‌شود.</p>
+    </div>
+
+    <!-- بخش چرا فیزون -->
+    <div class="section-title">چرا فیزون؟</div>
+    <div class="section-desc">
+      انتخاب تیم طراحی سایت، انتخاب شریک رشد کسب‌وکار شماست. ما در فیزون استانداردهای عالی برای حضور دیجیتال شما تعریف کرده‌ایم:
+    </div>
+
+    <div class="feature-item">
+      <div>
+        <i class="fa-solid fa-gift feature-icon"></i>
+        <span class="feature-header">مشاوره اختصاصی و رایگان:</span>
+      </div>
+      <div class="feature-body">قبل از پرداخت حتی یک ریال، مسیر ساخت سایت شما را کاملاً شفاف ترسیم می‌کنیم.</div>
+    </div>
+
+    <div class="feature-item">
+      <div>
+        <i class="fa-solid fa-bolt feature-icon"></i>
+        <span class="feature-header">تحویل سریع:</span>
+      </div>
+      <div class="feature-body">زمان شما ارزشمند است؛ پروژه‌تان را در سریع‌ترین زمان ممکن، آماده ورود به بازار می‌کنیم.</div>
+    </div>
+
+    <div class="feature-item">
+      <div>
+        <i class="fa-solid fa-gem feature-icon"></i>
+        <span class="feature-header">ارزش‌افزوده و سرمایه‌گذاری به‌صرفه:</span>
+      </div>
+      <div class="feature-body">ما کیفیت پریمیوم را با هزینه‌ای منطقی و متناسب با بودجه شما ارائه می‌دهیم؛ رقابتی، اما بدون افت کیفیت.</div>
+    </div>
+
+    <div class="feature-item">
+      <div>
+        <i class="fa-solid fa-heart feature-icon"></i>
+        <span class="feature-header">طراحی خلاقانه و کاربرپسند:</span>
+      </div>
+      <div class="feature-body">سایتی می‌سازیم که نه‌تنها چشم‌نواز و مدرن است، بلکه تجربه کاربری (UX) آن مخاطب را به مشتری وفادار تبدیل می‌کند.</div>
+    </div>
+
+    <div class="glowing-line" style="margin-top: 35px;"></div>
+
+    <!-- بخش اطلاعات ارتباطی -->
+    <div class="info-section">
+      <div class="info-row">
+        <span class="info-label">شماره تلفن مجموعه فیزون:</span>
+        <span class="phone-val">09382061251</span>
+      </div>
+
+      <div class="info-center-text">پاسخگویی تنها از طریق واتساپ و روبیکا</div>
+
+      <div class="info-row">
+        <span class="info-label">آیدی روبیکا:</span>
+        <span class="social-val">@Fizon_Support</span>
+      </div>
+
+      <div class="info-row">
+        <span class="info-label">کانال روبیکا جهت دریافت اخبار و اطلاعات:</span>
+        <span class="social-val">@Fizon_site</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- دکمه شناور چت -->
+  <div class="chat-float-btn" id="openChatBtn">
+    پشتیبانی آنلاین
+  </div>
+
+  <!-- پاپ آپ تشخیص سیستم دسکتاپ -->
+  <div class="modal-overlay" id="desktopModal">
+    <div class="modal-card">
+      <h3 style="margin-bottom: 12px; font-size: 1.1rem; color: #ffffff;">اعلان سیستم</h3>
+      <p style="font-size: 0.88rem; color: #dddddd; line-height: 1.7; margin-bottom: 20px;">
+        این وب‌سایت اختصاصاً برای دستگاه‌های موبایل طراحی شده است. جهت مشاهده بهترین تجربه کاربری، لطفا با تلفن همراه وارد شوید.
+      </p>
+      <button class="glass-btn" id="closeDesktopModal">بی‌خیال، ورود</button>
+    </div>
+  </div>
+
+  <!-- پاپ آپ چت آنلاین -->
+  <div class="modal-overlay" id="chatModal">
+    <div class="chat-modal-card">
+      <div class="chat-header">
+        پشتیبانی آنلاین هوش مصنوعی فیزون
+        <span class="chat-close-btn" id="closeChatBtn">&times;</span>
+      </div>
+      
+      <div class="chat-body" id="chatBody">
+        <!-- پیام خوش‌آمدگویی پیش‌فرض -->
+        <div class="chat-bubble-wrapper ai">
+          <div class="avatar ai-avatar">fizon</div>
+          <div class="chat-bubble">
+            خوش آمدید، دستیار هوش مصنوعی فیزون هستم. چطور می‌توانم شما را راهنمایی کنم؟
+          </div>
+        </div>
+      </div>
+
+      <div class="typing-indicator" id="typingIndicator">در حال تایپ کردن...</div>
+
+      <div class="chat-footer">
+        <div class="chat-input-group">
+          <input type="text" class="chat-input" id="chatInput" placeholder="سوال خود را بنویسید..." autocomplete="off">
+          <button class="glass-btn send-btn" id="sendBtn">ارسال</button>
+        </div>
+        <div class="timer-overlay" id="timerOverlay">
+          ارسال پیام بعدی تا <span id="countdownSec" style="margin: 0 4px; font-weight: bold;">12</span> ثانیه دیگر
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ۱. بررسی دستگاه و نمایش پاپ‌آپ دسکتاپ
+    window.addEventListener('DOMContentLoaded', () => {
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+      if (!isMobile) {
+        document.getElementById('desktopModal').classList.add('active');
+      }
+    });
+
+    document.getElementById('closeDesktopModal').addEventListener('click', () => {
+      document.getElementById('desktopModal').classList.remove('active');
+    });
+
+    // ۲. مدیریت پاپ‌آپ چت
+    const chatModal = document.getElementById('chatModal');
+    const openChatBtn = document.getElementById('openChatBtn');
+    const closeChatBtn = document.getElementById('closeChatBtn');
+
+    openChatBtn.addEventListener('click', () => {
+      chatModal.classList.add('active');
+    });
+
+    closeChatBtn.addEventListener('click', () => {
+      chatModal.classList.remove('active');
+    });
+
+    // ۳. مدیریت مکالمه و ارتباط با Backend Vercel
+    const chatBody = document.getElementById('chatBody');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const typingIndicator = document.getElementById('typingIndicator');
+    const timerOverlay = document.getElementById('timerOverlay');
+    const countdownSec = document.getElementById('countdownSec');
+
+    let chatHistory = [];
+
+    async function handleSendMessage() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+
+      // اضافه کردن پیام کاربر به صفحه
+      appendMessage('user', text);
+      chatInput.value = '';
+
+      // فعال‌سازی تایمر ۱۲ ثانیه‌ای مانع اسپم
+      startCooldownTimer(12);
+
+      // نمایش وضعیت در حال تایپ
+      typingIndicator.style.display = 'block';
+      chatBody.scrollTop = chatBody.scrollHeight;
+
+      const startTime = Date.now();
+
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text, history: chatHistory })
+        });
+
+        const data = await response.json();
+        const replyText = data.reply || "در حال حاضر خطایی رخ داده است.";
+
+        // ذخیره تاریخچه
+        chatHistory.push({ role: 'user', content: text });
+        chatHistory.push({ role: 'assistant', content: replyText });
+
+        // تضمین حداقل ۵ ثانیه تأخیر برای حس واقعی بودن
+        const elapsedTime = Date.now() - startTime;
+        const remainingDelay = Math.max(0, 5000 - elapsedTime);
+
+        setTimeout(() => {
+          typingIndicator.style.display = 'none';
+          appendMessage('ai', replyText);
+        }, remainingDelay);
+
+      } catch (err) {
+        setTimeout(() => {
+          typingIndicator.style.display = 'none';
+          appendMessage('ai', 'امکان برقراری ارتباط با سرور وجود ندارد.');
+        }, 5000);
+      }
+    }
+
+    function appendMessage(sender, message) {
+      const wrapper = document.createElement('div');
+      wrapper.className = `chat-bubble-wrapper ${sender}`;
+
+      const avatar = document.createElement('div');
+      avatar.className = `avatar ${sender === 'ai' ? 'ai-avatar' : 'user-avatar'}`;
+      avatar.innerText = sender === 'ai' ? 'fizon' : 'کاربر';
+
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-bubble';
+      bubble.innerText = message;
+
+      wrapper.appendChild(avatar);
+      wrapper.appendChild(bubble);
+      chatBody.appendChild(wrapper);
+
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function startCooldownTimer(seconds) {
+      chatInput.disabled = true;
+      sendBtn.disabled = true;
+      timerOverlay.style.display = 'flex';
+      let remaining = seconds;
+      countdownSec.innerText = remaining;
+
+      const interval = setInterval(() => {
+        remaining--;
+        countdownSec.innerText = remaining;
+        if (remaining <= 0) {
+          clearInterval(interval);
+          timerOverlay.style.display = 'none';
+          chatInput.disabled = false;
+          sendBtn.disabled = false;
+          chatInput.focus();
+        }
+      }, 1000);
+    }
+
+    sendBtn.addEventListener('click', handleSendMessage);
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') handleSendMessage();
+    });
+  </script>
+</body>
+</html>
