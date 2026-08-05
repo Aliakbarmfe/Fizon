@@ -59,6 +59,55 @@
       border-radius: 2px;
     }
 
+    /* باکس آمار بازدید بالای سایت سمت راست */
+    .stats-box {
+      background: rgba(15, 15, 15, 0.75);
+      border: 1px solid rgba(0, 243, 255, 0.3);
+      box-shadow: 0 0 12px rgba(0, 243, 255, 0.15);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 0.78rem;
+      backdrop-filter: blur(8px);
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .stats-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .stats-label {
+      color: #d1d1d1;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .stats-icon {
+      color: #00f3ff;
+      font-size: 0.85rem;
+    }
+
+    .stats-value {
+      font-weight: bold;
+      color: #00f3ff;
+      text-shadow: 0 0 6px rgba(0, 243, 255, 0.6);
+      direction: ltr;
+    }
+
+    .stats-timer {
+      font-size: 0.7rem;
+      color: #aaaaaa;
+      text-align: left;
+      direction: rtl;
+      margin-top: -2px;
+    }
+
     /* متن‌های نئونی */
     .neon-text {
       color: #00f3ff;
@@ -352,7 +401,7 @@
       flex-direction: row-reverse;
     }
 
-    .avatar {
+        .avatar {
       width: 32px;
       height: 32px;
       border-radius: 50%;
@@ -467,6 +516,25 @@
 
   <div class="container">
     <div class="glowing-line"></div>
+
+    <!-- باکس جدید آمار بازدید بالای سایت سمت راست -->
+    <div class="stats-box">
+      <div class="stats-row">
+        <span class="stats-label">
+          <i class="fa-solid fa-chart-line stats-icon"></i>
+          تعداد بازدید کل سایت:
+        </span>
+        <span class="stats-value" id="totalVisits">۴۵۸۳</span>
+      </div>
+      <div class="stats-row">
+        <span class="stats-label">
+          <i class="fa-solid fa-eye stats-icon"></i>
+          تعداد بازدید امروز:
+        </span>
+        <span class="stats-value" id="todayVisits">۰</span>
+      </div>
+      <div class="stats-timer" id="resetTimer">(به‌روزرسانی در حال محاسبه...)</div>
+    </div>
 
     <div class="header-title neon-text">Fizon | فیزون</div>
     <div class="header-subtitle">با فیزون ایده هات مرز هارو رد میکنند</div>
@@ -593,6 +661,43 @@
   </div>
 
   <script>
+    // تبدیل اعداد انگلیسی به فارسی
+    function toPersianDigits(num) {
+      return num.toString().replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+    }
+
+    // اسکریپت جدید دریافت و به‌روزرسانی آمار از فایربیس
+    async function fetchVisitStats() {
+      try {
+        const response = await fetch('/api/stats');
+        if (!response.ok) return;
+        const data = await response.json();
+
+        if (data.totalVisits !== undefined) {
+          document.getElementById('totalVisits').innerText = toPersianDigits(data.totalVisits);
+        }
+        if (data.todayVisits !== undefined) {
+          document.getElementById('todayVisits').innerText = toPersianDigits(data.todayVisits);
+        }
+
+        if (data.hoursLeft !== undefined && data.minutesLeft !== undefined) {
+          let timeText = '';
+          if (data.hoursLeft > 0) {
+            timeText = `(این آمار تا ${toPersianDigits(data.hoursLeft)} ساعت و ${toPersianDigits(data.minutesLeft)} دقیقه دیگر ریست می‌شود)`;
+          } else {
+            timeText = `(این آمار تا ${toPersianDigits(data.minutesLeft)} دقیقه دیگر ریست می‌شود)`;
+          }
+          document.getElementById('resetTimer').innerText = timeText;
+        }
+      } catch (e) {
+        console.error("خطا در دریافت آمار:", e);
+      }
+    }
+
+    // اجرای دریافت آمار در ابتدا و برنامه‌ریزی تکرار
+    fetchVisitStats();
+    setInterval(fetchVisitStats, 60000); // به‌روزرسانی فرانت هر ۱ دقیقه
+
     // ۱. بررسی دستگاه غیرموبایل
     window.addEventListener('DOMContentLoaded', () => {
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
@@ -716,5 +821,4 @@
     });
   </script>
 </body>
-        </html>
-  
+</html>
