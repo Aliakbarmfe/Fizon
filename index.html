@@ -62,19 +62,42 @@
     .info-notice {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
       font-size: 0.85rem;
       font-weight: bold;
       color: #00f3ff;
       letter-spacing: 1px; /* فونت کشیده */
       text-shadow: 0 0 8px rgba(0, 243, 255, 0.6);
+      flex-grow: 1;
+      position: relative;
     }
 
+    /* فلش سفارشی کشیده به سمت چپ */
     .arrow-anim {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
       color: #00f3ff;
-      font-size: 0.9rem;
-      animation: moveLeftFade 1.8s infinite ease-in-out;
+      filter: drop-shadow(0 0 6px rgba(0, 243, 255, 0.8));
+      animation: moveLeftFade 2.2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+      position: absolute;
+      right: 110px; /* شروع حرکت دقیقاً از کنار متن */
+    }
+
+    .arrow-line {
+      width: 45px; /* طول دم فلش */
+      height: 2px;
+      background-color: #00f3ff;
+      box-shadow: 0 0 8px #00f3ff;
+    }
+
+    .arrow-head {
+      border: solid #00f3ff;
+      border-width: 0 0 2px 2px;
+      display: inline-block;
+      padding: 4px;
+      transform: rotate(45deg);
+      margin-right: -2px;
+      box-shadow: -2px 2px 6px rgba(0, 243, 255, 0.8);
     }
 
     @keyframes moveLeftFade {
@@ -82,13 +105,32 @@
         transform: translateX(0);
         opacity: 1;
       }
-      70% {
-        transform: translateX(-18px);
+      75% {
+        /* طی کردن کامل فاصله تا قبل از دکمه همبرگری */
+        transform: translateX(calc(-100vw + 210px));
         opacity: 0;
       }
       100% {
         transform: translateX(0);
         opacity: 0;
+      }
+    }
+
+    /* محدودسازی مسافت حرکت در صفحات بزرگتر از موبایل */
+    @media (min-width: 500px) {
+      @keyframes moveLeftFade {
+        0% {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        75% {
+          transform: translateX(-280px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateX(0);
+          opacity: 0;
+        }
       }
     }
 
@@ -106,6 +148,8 @@
       backdrop-filter: blur(5px);
       box-shadow: 0 0 10px rgba(0, 243, 255, 0.15);
       transition: all 0.2s ease;
+      position: relative;
+      z-index: 2;
     }
 
     .hamburger-btn:active {
@@ -588,7 +632,7 @@
 
   <div class="bg-gradient"></div>
 
-  <!-- منوی کشویی اضافه شده -->
+  <!-- منوی کشویی -->
   <div class="drawer-overlay" id="drawerOverlay">
     <div class="drawer-menu">
       <div class="drawer-header">
@@ -614,11 +658,14 @@
   </div>
 
   <div class="container">
-    <!-- بخش جدید بالا قبل از خط سفید -->
+    <!-- بخش بالای صفحه با فلش کشیده جدید -->
     <div class="top-bar">
       <div class="info-notice">
         <span>اطلاعات بیشتر</span>
-        <i class="fa-solid fa-arrow-left arrow-anim"></i>
+        <div class="arrow-anim">
+          <span class="arrow-head"></span>
+          <span class="arrow-line"></span>
+        </div>
       </div>
       <button class="hamburger-btn" id="openDrawerBtn">
         <i class="fa-solid fa-bars"></i>
@@ -627,7 +674,7 @@
 
     <div class="glowing-line"></div>
 
-    <!-- باکس جدید آمار بازدید بالای سایت سمت راست -->
+    <!-- باکس آمار بازدید بالای سایت سمت راست -->
     <div class="stats-box">
       <div class="stats-row">
         <span class="stats-label">
