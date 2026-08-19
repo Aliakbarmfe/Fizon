@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سوالات متداول | فیزون</title>
+  <!-- فونت وزیرمتن و آیکون‌های FontAwesome -->
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Vazirmatn', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* هاله بنفش و آبی در پس‌زمینه */
+    .bg-gradient {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 100vw;
+      height: 70vh;
+      background: radial-gradient(circle at bottom right, rgba(138, 43, 226, 0.35), rgba(30, 144, 255, 0.15) 50%, transparent 80%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 25px 20px 100px 20px;
+    }
+
+    /* خط نورانی بالای صفحه */
+    .glowing-line {
+      width: 100%;
+      height: 2px;
+      background: #ffffff;
+      box-shadow: 0 0 12px #ffffff, 0 0 20px #8a2be2;
+      margin-bottom: 20px;
+      border-radius: 2px;
+    }
+
+    /* دکمه بازگشت */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #00f3ff;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      transition: transform 0.2s ease;
+      text-shadow: 0 0 6px rgba(0, 243, 255, 0.4);
+    }
+
+    .back-btn:active {
+      transform: translateX(4px);
+    }
+
+    .neon-text {
+      color: #00f3ff;
+      text-shadow: 0 0 8px rgba(0, 243, 255, 0.8), 0 0 15px rgba(0, 243, 255, 0.5);
+    }
+
+    .header-title {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .header-subtitle {
+      text-align: center;
+      font-size: 0.92rem;
+      color: #e0e0e0;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    /* میانبرهای هدایت به صفحات دیگر */
+    .navigation-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .nav-card {
+      background: rgba(15, 15, 15, 0.75);
+      border: 1px solid rgba(0, 243, 255, 0.3);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-decoration: none;
+      color: #ffffff;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-card:hover, .nav-card:active {
+      border-color: #8a2be2;
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
+    }
+
+    .nav-card-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-card-icon {
+      font-size: 1.3rem;
+      color: #ffd700;
+      text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+    }
+
+    .nav-card-text h4 {
+      font-size: 0.95rem;
+      font-weight: bold;
+      margin-bottom: 3px;
+    }
+
+    .nav-card-text p {
+      font-size: 0.78rem;
+      color: #aaaaaa;
+    }
+
+    .nav-card-arrow {
+      color: #00f3ff;
+      font-size: 0.9rem;
+    }
+
+    /* استایل آکاردئون سوالات متداول */
+    .faq-container {
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .faq-item {
+      background: rgba(15, 15, 15, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 14px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .faq-item.active {
+      border-color: rgba(0, 243, 255, 0.8);
+      box-shadow: 0 0 15px rgba(0, 243, 255, 0.25);
+    }
+
+    .faq-header {
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      font-size: 0.92rem;
+      font-weight: bold;
+      color: #ffffff;
+      line-height: 1.5;
+    }
+
+    .faq-header i.icon-chevron {
+      color: #00f3ff;
+      font-size: 0.85rem;
+      transition: transform 0.3s ease;
+      text-shadow: 0 0 6px rgba(0, 243, 255, 0.6);
+      margin-right: 8px;
+    }
+
+    .faq-item.active .faq-header i.icon-chevron {
+      transform: rotate(180deg);
+    }
+
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      padding: 0 16px;
+      font-size: 0.88rem;
+      color: #d1d1d1;
+      line-height: 1.85;
+      text-align: justify;
+      border-top: 1px solid transparent;
+    }
+
+    .faq-item.active .faq-content {
+      padding: 14px 16px 18px 16px;
+      border-top-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .faq-step-list {
+      padding-right: 18px;
+      margin-top: 8px;
+    }
+
+    .faq-step-list li {
+      margin-bottom: 6px;
+    }
+
+    /* دکمه شناور پشتیبانی */
+    .chat-float-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 125px;
+      height: 48px;
+      background: linear-gradient(135deg, #2e8b57, #8a2be2);
+      border-radius: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.82rem;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+      cursor: pointer;
+      z-index: 99;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.15s ease;
+      text-decoration: none;
+    }
+
+    .chat-float-btn:active {
+      transform: scale(0.92);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-gradient"></div>
+
+  <div class="container">
+    <div class="glowing-line"></div>
+
+    <a href="index.html" class="back-btn">
+      <i class="fa-solid fa-arrow-right"></i> بازگشت به صفحه اصلی
+    </a>
+
+    <div class="header-title neon-text">سوالات متداول</div>
+    <div class="header-subtitle">پاسخ شفاف به تمام پرسش‌ها و دغدغه‌های شما</div>
+
+    <!-- میانبر به صفحات اصلی -->
+    <div class="navigation-cards">
+      <a href="chera.html" class="nav-card">
+        <div class="nav-card-info">
+          <i class="fa-solid fa-lightbulb nav-card-icon"></i>
+          <div class="nav-card-text">
+            <h4>چرا به وب‌سایت نیاز داریم؟</h4>
+            <p>بررسی اهمیت ساخت سایت و تاثیر آن در برندسازی</p>
+          </div>
+        </div>
+        <i class="fa-solid fa-chevron-left nav-card-arrow"></i>
+      </a>
+
+      <a href="hazineh.html" class="nav-card">
+        <div class="nav-card-info">
+          <i class="fa-solid fa-tags nav-card-icon"></i>
+          <div class="nav-card-text">
+            <h4>محاسبه تعرفه‌ها و هزینه خدمات</h4>
+            <p>اطلاعات مربوط به هزینه‌ها و مشاوره رایگان</p>
+          </div>
+        </div>
+        <i class="fa-solid fa-chevron-left nav-card-arrow"></i>
+      </a>
+    </div>
+
+    <!-- آکاردئون سوالات -->
+    <div class="faq-container">
+
+      <!-- سوال پشتیبانی -->
+      <div class="faq-item active">
+        <div class="faq-header">
+          <span><i class="fa-solid fa-headset neon-text" style="margin-left: 8px;"></i> آیا وب‌سایت‌ها دارای پشتیبانی و پنل مدیریت هستند؟</span>
+          <i class="fa-solid fa-chevron-down icon-chevron"></i>
+        </div>
+        <div class="faq-content">
+          <p>
+            بله، تمامی وب‌سایت‌های طراحی‌شده توسط <strong>فیزون</strong> همراه با یک پنل مدیریت کاملاً فارسی، جامع و آسان ارائه می‌شوند تا شما بتوانید تمامی محتواها، محصولات، تصاویر و نوشته‌های سایت را به‌راحتی ویرایش، حذف یا اضافه کنید.
+          </p>
+          <p style="margin-top: 10px;">
+            همچنین پس از تحویل پروژه و جلب رضایت کامل شما، چنانچه در آینده قصد تغییر یا ویرایش بخش‌هایی از سایت را داشته باشید، خدمات پشتیبانی ما جهت اعمال تغییرات برای شما <strong>رایگان</strong> خواهد بود.
+          </p>
+        </div>
+      </div>
+
+      <!-- سوال نحوه پرداخت -->
+      <div class="faq-item">
+        <div class="faq-header">
+          <span><i class="fa-solid fa-credit-card neon-text" style="margin-left: 8px;"></i> روند مشاوره، طراحی و نحوه پرداخت هزینه‌ها چگونه است؟</span>
+          <i class="fa-solid fa-chevron-down icon-chevron"></i>
+        </div>
+        <div class="faq-content">
+          <p>
+            روند همکاری و پرداخت هزینه‌ها به صورت کاملاً شفاف و گام‌به‌گام به شرح زیر انجام می‌شود:
+          </p>
+          <ol class="faq-step-list">
+            <li><strong>مشاوره تخصصی و رایگان:</strong> در ابتدا حوزه کاری شما بررسی شده و بهترین نوع وب‌سایت متناسب با نیازتان پیشنهاد داده می‌شود.</li>
+            <li><strong>انتخاب استایل و ظاهر بصری:</strong> رنگ‌بندی، طرح و ظاهر سایت طبق سلیقه شما تعیین می‌گردد. در صورت عدم داشتن ایده اولیه، طرح‌های پیشنهادی و جذاب فیزون ارائه شده و قابل ویرایش خواهد بود.</li>
+            <li><strong>توافق نهایی و نحوه پرداخت:</strong> پس از تایید طرح اولیه و توافق بر سر هزینه، پرداخت‌ها به صورت <strong>کارت به کارت</strong> و مرحله‌ای (بخشی در ابتدای شروع پروژه و مابقی در میانه یا انتهای کار) انجام می‌پذیرد.</li>
+          </ol>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- دکمه شناور پشتیبانی -->
+  <a href="posht.html" class="chat-float-btn">
+    پشتیبانی آنلاین
+  </a>
+
+  <script>
+    // عملکرد باز و بسته شدن آکاردئون
+    document.querySelectorAll('.faq-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const faqItem = header.parentElement;
+        const content = faqItem.querySelector('.faq-content');
+
+        // بستن سایر آیتم‌ها
+        document.querySelectorAll('.faq-item').forEach(item => {
+          if (item !== faqItem && item.classList.contains('active')) {
+            item.classList.remove('active');
+            item.querySelector('.faq-content').style.maxHeight = null;
+          }
+        });
+
+        // باز و بسته کردن آیتم انتخاب‌شده
+        faqItem.classList.toggle('active');
+        if (faqItem.classList.contains('active')) {
+          content.style.maxHeight = content.scrollHeight + "px";
+        } else {
+          content.style.maxHeight = null;
+        }
+      });
+    });
+
+    // تنظیم ارتفاع اولیه برای آیتم باز
+    document.addEventListener("DOMContentLoaded", () => {
+      const activeContent = document.querySelector('.faq-item.active .faq-content');
+      if (activeContent) {
+        activeContent.style.maxHeight = activeContent.scrollHeight + "px";
+      }
+    });
+  </script>
+</body>
+</html>
