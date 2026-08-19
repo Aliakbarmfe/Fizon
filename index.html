@@ -261,6 +261,81 @@
       margin: 16px 0;
     }
 
+    /* -------------------------------------------
+       استایل‌های اسلایدر و انیمیشن پر شدن زیر عکس
+    ------------------------------------------- */
+    .image-slider-card {
+      margin-top: 35px;
+      background: rgba(15, 15, 15, 0.75);
+      border: 1px solid rgba(0, 243, 255, 0.3);
+      box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+      border-radius: 16px;
+      padding: 12px;
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slider-img-wrapper {
+      width: 100%;
+      height: 250px;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      background: #050505;
+    }
+
+    .slider-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .slider-img-wrapper img.active {
+      opacity: 1;
+    }
+
+    /* نوار انیمیشن پر شدن ریز */
+    .progress-bar-container {
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 2px;
+      margin-top: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #00f3ff, #8a2be2);
+      box-shadow: 0 0 8px #00f3ff;
+      border-radius: 2px;
+    }
+
+    .progress-bar-fill.animate {
+      animation: fillProgress 2.5s linear forwards;
+    }
+
+    @keyframes fillProgress {
+      0% {
+        width: 0%;
+      }
+      100% {
+        width: 100%;
+      }
+    }
+
     /* دکمه شناور چت */
     .chat-float-btn {
       position: fixed;
@@ -456,6 +531,21 @@
         <div class="contact-val-left social-style">@Fizon_site</div>
       </div>
     </div>
+
+    <!-- بخش اسلایدر عکس‌ها در پایین سایت -->
+    <div class="image-slider-card">
+      <div class="slider-img-wrapper">
+        <img src="/1787167616448.jpg" alt="Fizon Sample 1" class="active">
+        <img src="/1787167532995.jpg" alt="Fizon Sample 2">
+        <img src="/1787167494143.jpg" alt="Fizon Sample 3">
+        <img src="/1787167571849.jpg" alt="Fizon Sample 4">
+      </div>
+      <!-- انیمیشن پر شدن زیر عکس -->
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill animate" id="progressBar"></div>
+      </div>
+    </div>
+
   </div>
 
   <!-- دکمه شناور چت -->
@@ -480,7 +570,7 @@
       return num.toString().replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
     }
 
-    // اسکریپت جدید دریافت و به‌روزرسانی آمار از فایربیس
+    // اسکریپت دریافت و به‌روزرسانی آمار از فایربیس
     async function fetchVisitStats() {
       try {
         const response = await fetch('/api/stats');
@@ -508,11 +598,10 @@
       }
     }
 
-    // اجرای دریافت آمار در ابتدا و برنامه‌ریزی تکرار
     fetchVisitStats();
-    setInterval(fetchVisitStats, 60000); // به‌روزرسانی فرانت هر ۱ دقیقه
+    setInterval(fetchVisitStats, 60000);
 
-    // ۱. بررسی دستگاه غیرموبایل
+    // بررسی دستگاه غیرموبایل
     window.addEventListener('DOMContentLoaded', () => {
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
       if (!isMobile) {
@@ -523,6 +612,28 @@
     document.getElementById('closeDesktopModal').addEventListener('click', () => {
       document.getElementById('desktopModal').classList.remove('active');
     });
+
+    // -------------------------------------------
+    // منطق اسلایدر ۴ عکس و انیمیشن پر شدن هر ۲.۵ ثانیه
+    // -------------------------------------------
+    const images = document.querySelectorAll('.slider-img-wrapper img');
+    const progressBar = document.getElementById('progressBar');
+    let currentIndex = 0;
+
+    function nextSlide() {
+      images[currentIndex].classList.remove('active');
+      currentIndex = (currentIndex + 1) % images.length;
+      images[currentIndex].classList.add('active');
+
+      // ریست و اجرای مجدد انیمیشن Progress Bar
+      progressBar.classList.remove('animate');
+      void progressBar.offsetWidth; // Trigger Reflow
+      progressBar.classList.add('animate');
+    }
+
+    // تعویض عکس هر ۲.۵ ثانیه (۲۵۰۰ میلی ثانیه)
+    setInterval(nextSlide, 2500);
   </script>
 </body>
-</html>
+        </html>
+        
