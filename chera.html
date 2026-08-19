@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>چرا فیزون؟ | بلاگ و راهنمای رشد</title>
+  <!-- فونت وزیرمتن و آیکون‌های FontAwesome -->
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Vazirmatn', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* هاله بنفش و آبی در پس‌زمینه */
+    .bg-gradient {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 100vw;
+      height: 70vh;
+      background: radial-gradient(circle at bottom right, rgba(138, 43, 226, 0.35), rgba(30, 144, 255, 0.15) 50%, transparent 80%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 25px 20px 100px 20px;
+    }
+
+    /* خط نورانی بالای صفحه */
+    .glowing-line {
+      width: 100%;
+      height: 2px;
+      background: #ffffff;
+      box-shadow: 0 0 12px #ffffff, 0 0 20px #8a2be2;
+      margin-bottom: 20px;
+      border-radius: 2px;
+    }
+
+    /* دکمه بازگشت به صفحه اصلی */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #00f3ff;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      transition: transform 0.2s ease;
+      text-shadow: 0 0 6px rgba(0, 243, 255, 0.4);
+    }
+
+    .back-btn:active {
+      transform: translateX(4px);
+    }
+
+    /* متن‌های نئونی */
+    .neon-text {
+      color: #00f3ff;
+      text-shadow: 0 0 8px rgba(0, 243, 255, 0.8), 0 0 15px rgba(0, 243, 255, 0.5);
+    }
+
+    .header-title {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .header-subtitle {
+      text-align: center;
+      font-size: 0.92rem;
+      color: #e0e0e0;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    /* کارت‌های مقالات بلاگ */
+    .blog-card {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+      border-radius: 16px;
+      padding: 22px;
+      background: rgba(10, 10, 10, 0.7);
+      backdrop-filter: blur(10px);
+      margin-bottom: 25px;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .blog-header-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid rgba(0, 243, 255, 0.3);
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+    }
+
+    .blog-icon {
+      color: #ffd700;
+      font-size: 1.2rem;
+      text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+    }
+
+    .blog-title {
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: #ffffff;
+      line-height: 1.5;
+    }
+
+    .blog-body {
+      font-size: 0.88rem;
+      color: #d1d1d1;
+      line-height: 1.85;
+      text-align: justify;
+    }
+
+    .blog-body p {
+      margin-bottom: 12px;
+    }
+
+    .blog-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .highlight-text {
+      color: #fff8dc;
+      font-weight: 500;
+    }
+
+    /* دکمه شناور پشتیبانی */
+    .chat-float-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 125px;
+      height: 48px;
+      background: linear-gradient(135deg, #2e8b57, #8a2be2);
+      border-radius: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.82rem;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+      cursor: pointer;
+      z-index: 99;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.15s ease;
+      text-decoration: none;
+    }
+
+    .chat-float-btn:active {
+      transform: scale(0.92);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-gradient"></div>
+
+  <div class="container">
+    <div class="glowing-line"></div>
+
+    <a href="index.html" class="back-btn">
+      <i class="fa-solid fa-arrow-right"></i> بازگشت به صفحه اصلی
+    </a>
+
+    <div class="header-title neon-text">چرا فیزون؟</div>
+    <div class="header-subtitle">تحلیلی تخصصی بر ضرورت حضور حرفه‌ای کسب‌وکار شما در دنیای دیجیتال</div>
+
+    <!-- مقاله ۱ -->
+    <div class="blog-card">
+      <div class="blog-header-wrapper">
+        <i class="fa-solid fa-shield-halved blog-icon"></i>
+        <h2 class="blog-title">چگونه ساخت سایت باعث ایجاد اعتبار و اعتماد می‌شود؟</h2>
+      </div>
+      <div class="blog-body">
+        <p>
+          در دنیای تجارت، اولین برخورد مخاطب با برند شما، تعیین‌کننده مسیر آینده همکاری است. وب‌سایت رسمی یک مجموعه، همانند دفتر کار یا پایگاه اصلی شما در فضای اینترنت عمل می‌کند. وجود دامنه اختصاصی، ایمیل‌های سازمانی و درگاه‌های پرداخت امن این سیگنال را به مخاطب ارسال می‌کند که با یک کسب‌وکار رسمی، قانونمند و بلندمدت طرف است.
+        </p>
+        <p>
+          مشتریان برچسب بی‌اعتمادی را روی برندهایی می‌زنند که هویت مشخصی در وب ندارند. وب‌سایت به شما آدرس ثبت‌شده، شفافیت در ارائه اطلاعات، بخش درباره ما و درگاه‌های مستقیم تحویل خدمات می‌دهد؛ عواملی که ناخودآگاه در ذهن کاربر حس ثبات، اصالت و اعتبار خلق می‌کنند.
+        </p>
+      </div>
+    </div>
+
+    <!-- مقاله ۲ -->
+    <div class="blog-card">
+      <div class="blog-header-wrapper">
+        <i class="fa-solid fa-mobile-screen-button blog-icon"></i>
+        <h2 class="blog-title">چرا در سال ۱۴۰۵ (۲۰۲۶) داشتن فقط صفحه مجازی مثل اینستاگرام کافی نیست؟</h2>
+      </div>
+      <div class="blog-body">
+        <p>
+          اتکا به شبکه‌های اجتماعی برای چرخش چرخ‌های یک کسب‌وکار، مثل ساختن خانه روی زمین اجاره‌ای است. تغییر مداوم الگوریتم‌ها، مسدود شدن ناگهانی صفحات، محدودیت‌های اینترنتی و نبود امکانات مدیریت فروش، تنها بخشی از خطرات فعالیت تک‌کاناله هستند.
+        </p>
+        <p>
+          امروزه کاربران برای خریدهای اصلی و بررسی خدمات تخصصی، مستقیماً وارد گوگل می‌شوند. وب‌سایت ملک شخصی شماست؛ جایی که الگوریتم دست‌ساز شبکه‌های اجتماعی نمی‌تواند ارتباط شما را با مخاطب قطع کند. داشتن وب‌سایت در کنار شبکه اجتماعی، فرمول درست یک برند هوشمند است.
+        </p>
+      </div>
+    </div>
+
+    <!-- مقاله ۳ -->
+    <div class="blog-card">
+      <div class="blog-header-wrapper">
+        <i class="fa-solid fa-chart-line-up blog-icon"></i>
+        <h2 class="blog-title">طراحی سایت چقدر روی فروش تأثیر دارد؟</h2>
+      </div>
+      <div class="blog-body">
+        <p>
+          یک سایت حرفه‌ای فقط یک ویترین زیبا نیست، بلکه مجهزترین فروشنده ۲۴ ساعته مجموعه شماست. وقتی فرآیند انتخاب، بررسی و ثبت سفارش برای مشتری روان باشد، نرخ تبدیل بازدیدکننده به خریدار به‌شدت افزایش می‌یابد.
+        </p>
+        <p>
+          سرعت بالا، عدم پیچیدگی در ثبت سفارش، نمایش شفاف قیمت‌ها و پشتیبانی دسترس‌پذیر، مانع از انصراف مشتری در لحظات نهایی خرید می‌شود. وب‌سایت با خودکارسازی فرآیند فروش، ظرفیت پذیرش همزمان صدها مشتری را بدون محدودیت زمانی ایجاد می‌کند.
+        </p>
+      </div>
+    </div>
+
+    <!-- مقاله ۴ -->
+    <div class="blog-card">
+      <div class="blog-header-wrapper">
+        <i class="fa-solid fa-code-compare blog-icon"></i>
+        <h2 class="blog-title">سایت اختصاصی یا قالب‌های آماده رایگان؟ کدام برای من بهتر است؟</h2>
+      </div>
+      <div class="blog-body">
+        <p>
+          قالب‌های آماده و سنگین رایگان شاید در نگاه اول اقتصادی به نظر برسند، اما به دلیل کدهای کُند، حفره‌های امنیتی و محدودیت در شخصی‌سازی، در میان‌مدت هزینه‌های زیادی روی دست شما می‌گذارند.
+        </p>
+        <p>
+          در مقابل، یک طراحی اختصاصی یا قالب بهینه‌سازی شده و سبُک، دقیقاً متناسب با نیاز کسب‌وکار شما توسعه می‌یابد. این کار امنیت بالایی دارد، لود سایت را به زیر ۳ ثانیه می‌رساند و تجربه کاربری (UX) بی‌نقصی خلق می‌کند که نتیجه آن رضایت کامل مشتری و ارتقای سئوی سایت است.
+        </p>
+      </div>
+    </div>
+
+    <!-- مقاله ۵ -->
+    <div class="blog-card">
+      <div class="blog-header-wrapper">
+        <i class="fa-solid fa-wand-magic-sparkles blog-icon"></i>
+        <h2 class="blog-title">ساخت سایت فقط برای زیباییست یا جلب توجه به یاد ماندنی و اعتماد؟</h2>
+      </div>
+      <div class="blog-body">
+        <p>
+          زیبایی بدون استراتژی مانند تابلوهای تبلیغاتی خالی است. طراحی سایت ترکیبی از هنر بصری و روانشناسی رفتار کاربر است. رنگ‌ها، فونت‌ها و افکت‌های نئونی سبک مدرن، ابتدا توجه کاربر را جلب می‌کنند؛ اما ساختار دقیق و چیدمان حرفه‌ای است که ماندگاری ایجاد می‌کند.
+        </p>
+        <p>
+          هدف ما در فیزون این است که بین زیبایی نئونی-مدرن و تجربه کاربریِ ساده توازن برقرار کنیم. این ترکیب باعث می‌شود برند شما در ذهن مخاطب حک شود و حس کیفیت، به ماندگاری و اعتماد تبدیل گردد.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- دکمه شناور پشتیبانی -->
+  <a href="posht.html" class="chat-float-btn">
+    پشتیبانی آنلاین
+  </a>
+
+</body>
+  </html>
+  
