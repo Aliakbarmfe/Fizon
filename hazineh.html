@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تعرفه‌ها و مشاوره | فیزون</title>
+  <!-- فونت وزیرمتن و آیکون‌های FontAwesome -->
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Vazirmatn', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* هاله بنفش و آبی در پس‌زمینه */
+    .bg-gradient {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 100vw;
+      height: 70vh;
+      background: radial-gradient(circle at bottom right, rgba(138, 43, 226, 0.35), rgba(30, 144, 255, 0.15) 50%, transparent 80%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 25px 20px 100px 20px;
+    }
+
+    /* خط نورانی بالای صفحه */
+    .glowing-line {
+      width: 100%;
+      height: 2px;
+      background: #ffffff;
+      box-shadow: 0 0 12px #ffffff, 0 0 20px #8a2be2;
+      margin-bottom: 20px;
+      border-radius: 2px;
+    }
+
+    /* دکمه بازگشت */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #00f3ff;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      transition: transform 0.2s ease;
+      text-shadow: 0 0 6px rgba(0, 243, 255, 0.4);
+    }
+
+    .back-btn:active {
+      transform: translateX(4px);
+    }
+
+    .neon-text {
+      color: #00f3ff;
+      text-shadow: 0 0 8px rgba(0, 243, 255, 0.8), 0 0 15px rgba(0, 243, 255, 0.5);
+    }
+
+    .header-title {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .header-subtitle {
+      text-align: center;
+      font-size: 0.92rem;
+      color: #e0e0e0;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    /* کارت‌های اصلی */
+    .info-card {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+      border-radius: 16px;
+      padding: 20px;
+      background: rgba(10, 10, 10, 0.7);
+      backdrop-filter: blur(10px);
+      margin-bottom: 22px;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: #ffffff;
+      border-bottom: 1px solid rgba(0, 243, 255, 0.3);
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+    }
+
+    .card-icon {
+      color: #ffd700;
+      font-size: 1.2rem;
+      text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+    }
+
+    .card-body {
+      font-size: 0.88rem;
+      color: #d1d1d1;
+      line-height: 1.85;
+      text-align: justify;
+    }
+
+    /* جدول مقایسه تنوع */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .pricing-box {
+      background: rgba(20, 20, 20, 0.6);
+      border: 1px solid rgba(138, 43, 226, 0.3);
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .pricing-box:hover {
+      border-color: #00f3ff;
+      box-shadow: 0 0 12px rgba(0, 243, 255, 0.2);
+    }
+
+    .pricing-box i {
+      font-size: 1.5rem;
+      color: #00f3ff;
+      margin-bottom: 8px;
+    }
+
+    .pricing-box h4 {
+      font-size: 0.88rem;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .pricing-box p {
+      font-size: 0.75rem;
+      color: #aaaaaa;
+    }
+
+    /* بخش کپی انیمیشنی اطلاعات تماس */
+    .contact-card {
+      background: rgba(18, 18, 18, 0.8);
+      border: 1px solid rgba(0, 243, 255, 0.3);
+      border-radius: 16px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      margin-top: 25px;
+      box-shadow: 0 0 15px rgba(0, 243, 255, 0.15);
+    }
+
+    .copy-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .copy-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .copy-item:active {
+      transform: scale(0.97);
+      border-color: #00f3ff;
+      background: rgba(0, 243, 255, 0.1);
+    }
+
+    .copy-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .copy-label {
+      font-size: 0.78rem;
+      color: #aaaaaa;
+    }
+
+    .copy-val {
+      font-size: 0.92rem;
+      font-weight: bold;
+      color: #00f3ff;
+      direction: ltr;
+      text-align: right;
+    }
+
+    .copy-btn-icon {
+      color: #ffd700;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+    }
+
+    /* نشان اطلاع‌رسانی کپی */
+    .toast-msg {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: linear-gradient(135deg, #8a2be2, #00f3ff);
+      color: #ffffff;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0, 243, 255, 0.4);
+      z-index: 1000;
+      transition: transform 0.4s ease;
+      pointer-events: none;
+    }
+
+    .toast-msg.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .contact-badge {
+      text-align: center;
+      background: rgba(138, 43, 226, 0.2);
+      border: 1px solid rgba(138, 43, 226, 0.4);
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      color: #e0e0e0;
+      margin: 16px 0;
+    }
+
+    /* دکمه شناور پشتیبانی */
+    .chat-float-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 125px;
+      height: 48px;
+      background: linear-gradient(135deg, #2e8b57, #8a2be2);
+      border-radius: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.82rem;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+      cursor: pointer;
+      z-index: 99;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.15s ease;
+      text-decoration: none;
+    }
+
+    .chat-float-btn:active {
+      transform: scale(0.92);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-gradient"></div>
+
+  <!-- پیام پاپ‌آپ کپی شدن -->
+  <div class="toast-msg" id="toastMsg">با موفقیت کپی شد!</div>
+
+  <div class="container">
+    <div class="glowing-line"></div>
+
+    <a href="index.html" class="back-btn">
+      <i class="fa-solid fa-arrow-right"></i> بازگشت به صفحه اصلی
+    </a>
+
+    <div class="header-title neon-text">محاسبه تعرفه و خدمات</div>
+    <div class="header-subtitle">شفافیت در هزینه‌ها، متناسب با نیاز و بودجه کسب‌وکار شما</div>
+
+    <!-- کارت توضیحات نحوه قیمت‌گذاری -->
+    <div class="info-card">
+      <div class="card-title">
+        <i class="fa-solid fa-calculator card-icon"></i>
+        <span>مبنای محاسبه هزینه‌ها چگونه است؟</span>
+      </div>
+      <div class="card-body">
+        محاسبه قیمت ساخت وب‌سایت در مجموعه <strong>فیزون</strong> کاملاً شفاف و بر اساس نیاز دقیق پروژه شما انجام می‌شود. هزینه‌ها متناسب با امکانات، ابعاد و میزان پیچیدگی فنی تعیین می‌گردند:
+      </div>
+
+      <div class="pricing-grid">
+        <div class="pricing-box">
+          <i class="fa-solid fa-feather"></i>
+          <h4>پروژه‌های سبک</h4>
+          <p>امکانات پایه، تحویل سریع و هزینه کاملاً اقتصادی</p>
+        </div>
+        <div class="pricing-box">
+          <i class="fa-solid fa-layer-group"></i>
+          <h4>پروژه‌های پیشرفته</h4>
+          <p>قابلیت‌های اختصاصی، سنگین و امکانات کامل فروشگاهی/شرکتی</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- کارت مشاوره رایگان -->
+    <div class="info-card">
+      <div class="card-title">
+        <i class="fa-solid fa-comments-dollar card-icon"></i>
+        <span>مشاوره استعلام قیمت و طراحی (۱۰۰٪ رایگان)</span>
+      </div>
+      <div class="card-body">
+        <p style="margin-bottom: 10px;">
+          قبل از شروع کار و پرداخت هرگونه هزینه، می‌توانید از خدمات مشاوره رایگان ما استفاده کنید:
+        </p>
+        <ul style="padding-right: 18px; margin-bottom: 10px; line-height: 1.8;">
+          <li>استعلام دقیق هزینه بر اساس بودجه و نیاز شما</li>
+          <li>مشاوره انتخاب سبک، رنگ‌بندی و ظاهر بصری سایت</li>
+        </ul>
+        <p>
+          چنانچه ایده خاصی برای ظاهر سایت خود ندارید، تیم فیزون طرح‌های پیشنهادی، مدرن و متناسب با موضوع فعالیتتان را به شما ارائه خواهد داد. انتخاب نهایی استایل همواره طبق سلیقه و نظر مستقیم شماست.
+        </p>
+      </div>
+    </div>
+
+    <!-- کادر اطلاعات تماس جهت کپی -->
+    <div class="contact-card">
+      <div style="text-align: center; margin-bottom: 15px; font-weight: bold; font-size: 0.95rem;" class="neon-text">
+        ارتباط جهت استعلام قیمت و مشاوره
+      </div>
+
+      <div class="copy-item" onclick="copyToClipboard('09382061251', 'شماره تماس')">
+        <div class="copy-info">
+          <span class="copy-label">شماره تلفن (جهت کپی):</span>
+          <span class="copy-val">09382061251</span>
+        </div>
+        <span class="copy-btn-icon"><i class="fa-solid fa-copy"></i> کپی</span>
+      </div>
+
+      <div class="contact-badge">
+        پاسخگویی تنها از طریق واتساپ و روبیکا
+      </div>
+
+      <div class="copy-item" onclick="copyToClipboard('@CoD_Fizon', 'آیدی پشتیبانی')">
+        <div class="copy-info">
+          <span class="copy-label">آیدی پشتیبانی روبیکا:</span>
+          <span class="copy-val">@CoD_Fizon</span>
+        </div>
+        <span class="copy-btn-icon"><i class="fa-solid fa-copy"></i> کپی</span>
+      </div>
+
+      <div class="copy-item" onclick="copyToClipboard('@Fizon_site', 'آیدی کانال')">
+        <div class="copy-info">
+          <span class="copy-label">کانال اطلاع‌رسانی روبیکا:</span>
+          <span class="copy-val">@Fizon_site</span>
+        </div>
+        <span class="copy-btn-icon"><i class="fa-solid fa-copy"></i> کپی</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- دکمه شناور پشتیبانی -->
+  <a href="posht.html" class="chat-float-btn">
+    پشتیبانی آنلاین
+  </a>
+
+  <script>
+    // تابع کپی کردن متن با کلیک
+    function copyToClipboard(text, label) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(`${label} با موفقیت کپی شد`);
+      }).catch(err => {
+        console.error('خطا در کپی:', err);
+      });
+    }
+
+    // نمایش اعلان کپی شدن
+    function showToast(message) {
+      const toast = document.getElementById('toastMsg');
+      toast.innerText = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+  </script>
+</body>
+          </html>
+          
