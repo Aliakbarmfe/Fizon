@@ -49,6 +49,160 @@
       padding: 25px 20px 100px 20px;
     }
 
+    /* استایل‌های بخش جدید بالای صفحه */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .info-notice {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: #00f3ff;
+      letter-spacing: 1px; /* فونت کشیده */
+      text-shadow: 0 0 8px rgba(0, 243, 255, 0.6);
+    }
+
+    .arrow-anim {
+      display: inline-block;
+      color: #00f3ff;
+      font-size: 0.9rem;
+      animation: moveLeftFade 1.8s infinite ease-in-out;
+    }
+
+    @keyframes moveLeftFade {
+      0% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      70% {
+        transform: translateX(-18px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0);
+        opacity: 0;
+      }
+    }
+
+    .hamburger-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(0, 243, 255, 0.3);
+      color: #ffffff;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 10px rgba(0, 243, 255, 0.15);
+      transition: all 0.2s ease;
+    }
+
+    .hamburger-btn:active {
+      transform: scale(0.92);
+    }
+
+    /* منوی کشویی */
+    .drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    .drawer-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .drawer-menu {
+      position: fixed;
+      top: 0;
+      left: -280px;
+      width: 280px;
+      height: 100%;
+      background: rgba(12, 12, 12, 0.95);
+      border-right: 1px solid rgba(0, 243, 255, 0.3);
+      box-shadow: 5px 0 25px rgba(0, 243, 255, 0.2);
+      z-index: 2001;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .drawer-overlay.active .drawer-menu {
+      transform: translateX(280px);
+    }
+
+    .drawer-header {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 25px;
+    }
+
+    .close-drawer-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s ease;
+    }
+
+    .close-drawer-btn:active {
+      transform: scale(0.9);
+    }
+
+    .drawer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .drawer-link {
+      color: #e0e0e0;
+      text-decoration: none;
+      padding: 12px 15px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+    }
+
+    .drawer-link:active {
+      background: rgba(0, 243, 255, 0.15);
+      border-color: rgba(0, 243, 255, 0.4);
+      color: #00f3ff;
+    }
+
     /* خط نورانی بالای صفحه */
     .glowing-line {
       width: 100%;
@@ -434,7 +588,43 @@
 
   <div class="bg-gradient"></div>
 
+  <!-- منوی کشویی اضافه شده -->
+  <div class="drawer-overlay" id="drawerOverlay">
+    <div class="drawer-menu">
+      <div class="drawer-header">
+        <button class="close-drawer-btn" id="closeDrawerBtn">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="drawer-links">
+        <a href="chera.html" class="drawer-link">
+          <i class="fa-solid fa-blog" style="color: #00f3ff;"></i>
+          چرا ساخت سایت مهم است؟ (وبلاگ)
+        </a>
+        <a href="hazineh.html" class="drawer-link">
+          <i class="fa-solid fa-coins" style="color: #00f3ff;"></i>
+          هزینه ساخت سایت چقدر؟
+        </a>
+        <a href="soalat.html" class="drawer-link">
+          <i class="fa-solid fa-circle-question" style="color: #00f3ff;"></i>
+          سوالات متداول
+        </a>
+      </div>
+    </div>
+  </div>
+
   <div class="container">
+    <!-- بخش جدید بالا قبل از خط سفید -->
+    <div class="top-bar">
+      <div class="info-notice">
+        <span>اطلاعات بیشتر</span>
+        <i class="fa-solid fa-arrow-left arrow-anim"></i>
+      </div>
+      <button class="hamburger-btn" id="openDrawerBtn">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
     <div class="glowing-line"></div>
 
     <!-- باکس جدید آمار بازدید بالای سایت سمت راست -->
@@ -565,6 +755,25 @@
   </div>
 
   <script>
+    // مدیریت باز و بسته شدن منوی کشویی
+    const openDrawerBtn = document.getElementById('openDrawerBtn');
+    const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+    const drawerOverlay = document.getElementById('drawerOverlay');
+
+    openDrawerBtn.addEventListener('click', () => {
+      drawerOverlay.classList.add('active');
+    });
+
+    closeDrawerBtn.addEventListener('click', () => {
+      drawerOverlay.classList.remove('active');
+    });
+
+    drawerOverlay.addEventListener('click', (e) => {
+      if (e.target === drawerOverlay) {
+        drawerOverlay.classList.remove('active');
+      }
+    });
+
     // تبدیل اعداد انگلیسی به فارسی
     function toPersianDigits(num) {
       return num.toString().replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
